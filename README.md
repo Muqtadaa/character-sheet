@@ -59,6 +59,23 @@ Active in-play effects             ─┘
 
 ## Design system
 
-Authored and enforced with **Impeccable** (`npx impeccable install` →
-`/impeccable init`; Node ≥ 22.12). Semantic design tokens are the single source
-of truth; components consume tokens, never raw literals.
+Authored and enforced with **Impeccable** (pbakaus). The design language lives
+in `PRODUCT.md` + `DESIGN.md` (the `/impeccable init` artifacts) and
+`.impeccable/config.json`. Semantic design tokens are the single source of
+truth; components consume tokens, never raw literals.
+
+- **Enforcement works offline now:** `npm run design:check` runs the Impeccable
+  detector (bundled in the `impeccable` dev dependency) against `./src`, reading
+  `DESIGN.md` for context. Wire it into CI alongside tests.
+- **Finish the full skill install on an unrestricted network** (the sandbox this
+  was built in blocks `impeccable.style`, so the interactive skill couldn't
+  download):
+
+  ```bash
+  npx impeccable install     # detects Claude Code, installs the skill + hook
+  # PRODUCT.md and DESIGN.md already exist — /impeccable init will pick them up
+  ```
+
+  After that, the interactive commands (`/impeccable shape`, `craft`, `audit`,
+  `critique`, `polish`, `live`) are available in Claude Code, and the edit-time
+  detector hook runs automatically. Node ≥ 22.12 required.

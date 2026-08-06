@@ -1,0 +1,15 @@
+{
+  "$schema": "https://impeccable.style/schema/config.json",
+  "detector": {
+    "designSystem": {
+      "enabled": true
+    },
+    "ignoreRules": [],
+    "ignoreFiles": [
+      "packages/engine/**",
+      "**/*.test.ts",
+      "supabase/**"
+    ],
+    "ignoreValues": {}
+  }
+}
