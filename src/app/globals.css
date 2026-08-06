@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Semantic design tokens — the single source of truth for color/type/spacing.
+ * Components consume these via Tailwind (bg-surface, text-stat-negative, …),
+ * never raw literals. Values are `R G B` triplets so Tailwind's <alpha-value>
+ * opacity modifiers work. Governed by DESIGN.md (Impeccable).
+ *
+ * Palette: warm parchment surfaces + deep ink text ("tome, not tax form"),
+ * a single arcane/metal accent, and status colors validated for WCAG AA that
+ * are ALWAYS paired with an icon + sign in the UI (never color-alone).
+ */
+:root {
+  --surface: 244 240 232;          /* parchment */
+  --surface-raised: 252 249 243;
+  --surface-sunken: 235 229 218;
+  --border: 210 200 182;
+  --text-primary: 38 32 26;        /* ink */
+  --text-muted: 104 94 80;
+  --accent: 122 74 44;             /* burnished copper */
+  --accent-fg: 252 249 243;
+  --stat-positive: 40 110 72;      /* heal / buff (AA on parchment) */
+  --stat-negative: 168 44 44;      /* damage / debuff */
+  --stat-temp: 58 96 150;          /* temp HP */
+  --danger: 168 44 44;
+
+  --radius: 6px;
+  --font-display: 'Cinzel', Georgia, serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+:root[data-theme='dark'],
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --surface: 24 22 20;           /* candlelit slate */
+    --surface-raised: 34 31 28;
+    --surface-sunken: 18 16 14;
+    --border: 58 52 46;
+    --text-primary: 234 228 218;
+    --text-muted: 166 156 142;
+    --accent: 198 146 96;
+    --accent-fg: 24 22 20;
+    --stat-positive: 96 190 132;
+    --stat-negative: 232 108 100;
+    --stat-temp: 128 172 224;
+    --danger: 232 108 100;
+  }
+}
+
+/* Explicit dark override wins in both directions (theme toggle stamps data-theme). */
+:root[data-theme='dark'] {
+  --surface: 24 22 20;
+  --surface-raised: 34 31 28;
+  --surface-sunken: 18 16 14;
+  --border: 58 52 46;
+  --text-primary: 234 228 218;
+  --text-muted: 166 156 142;
+  --accent: 198 146 96;
+  --accent-fg: 24 22 20;
+  --stat-positive: 96 190 132;
+  --stat-negative: 232 108 100;
+  --stat-temp: 128 172 224;
+  --danger: 232 108 100;
+}
+
+body {
+  background: rgb(var(--surface));
+  color: rgb(var(--text-primary));
+  font-family: var(--font-body);
+  /* Tabular figures keep columns of stat modifiers aligned. */
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
